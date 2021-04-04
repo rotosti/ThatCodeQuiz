@@ -6,9 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <title>Challenge Yourself Code Quiz</title>
 </head>
 <body>
+    <div id="high-score-link">View High Scores</div>
+    <div id="right-box">
+        <div class="right-box-title">Time: <span class="updating-text" id="time-left">00</span></div>
+        <div class="right-box-title">Score: <span class="updating-text" id="score">00</span></div>
+    </div>
+
+    <div id="welcome-card">
+        <h1>Welcome to the Challenge Yourself Code Quiz</h1>
+        <p>In this coding quiz, you are given 10 questions.  You have 30 seconds to answer the multiple choice
+            questions presented to you.  If you answer a question incorrectly, you will lose 2 seconds.
+            If you run out of time, the quiz will end. 
+        </p>
+        <p>When you are ready, click the begin button below.</p>
+        <div class="button" id="begin-button">Begin</div>
+    </div>
+
+    <div id="question-card">
+        <h2 id="question">This is a place holder question to figure out the layout.</h2>
+        <ol>
+            <li id="choice-1"><span>What</span></li>
+            <li id="choice-2"><span>Okay</span></li>
+            <li id="choice-3"><span>Huh?</span></li>
+            <li id="choice-4"><span>No Way</span></li>
+            <li id="choice-5"><span>Bruhhhh</span></li>
+        </ol>
+    </div>
+
+    <div id="form-card">
+        <h2>Your Score: <span id="final-score"></span></h2>
+        <input placeholder="Your name.." type="text">
+        <div id="button-container-on-form-card">
+            <div class="button" id="back-to-start-button-from-form">Back to Start</div>
+            <div class="button" id="submit-to-scoreboard">Submit Score</div>
+        </div>
+    </div>
+
+    <div id="high-scores-card">
+        <h2>High Scores</h2>
+        <ol>
+            <!-- template for li <li><span id="user-name"></span><span id="user-score"></span></li> -->
+        </ol>
+        <div class="button" id="back-to-start-button">Back</div>
+    </div>
     
     <script src="./assets/javascript/script.js"></script>
 </body>

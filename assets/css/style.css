@@ -1,0 +1,213 @@
+body {
+    font-family: 'Dela Gothic One', cursive;
+}
+
+#high-score-link {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 2%;
+    color: #630436;
+    opacity: 0.5;
+}
+
+#high-score-link:hover {
+    opacity: 1.0;
+}
+
+#right-box {
+    /* requires block */
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 2%;
+    width: 120px;
+    color: #630436;
+}
+
+.right-box-title {
+    position: relative;
+    text-align: left;
+    margin-bottom: 5%;
+}
+
+.updating-text {
+    position: absolute;
+    right: 5px;
+}
+
+
+#welcome-card {
+    /* change to flex to view card */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: auto;
+    margin: 12% auto 0 auto;
+    text-align: center;
+}
+
+#welcome-card h1 {
+    padding: 2%;
+    margin-bottom: 2%;
+    font-size: 200%;
+    color: #630436;
+}
+
+#welcome-card p {
+    line-height: 1.4;
+    font-size: 140%;
+}
+
+.button {
+    padding: 2%;
+    margin-top: 8%;
+    font-size: 160%;
+    width: 40%;
+    border-radius: 12px;
+    color: antiquewhite;
+    background-color:#630436;
+    opacity: 0.4;
+    text-align: center;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+#question-card {
+    /* needs flex to work */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 9% auto 0 auto;
+    width: 60%;
+    height: auto;
+}
+
+#question-card h2 {
+    padding: 3%;
+    font-size: 200%;
+    line-height: 1.2;
+    margin-bottom: 2%;
+    color: #630436;
+}
+
+#question-card ol {
+    list-style-type: upper-alpha;
+    list-style-position: inside;
+    font-size: 140%;
+    width: 60%;
+    margin: 0 auto;
+    background-color: 630436;
+}
+
+#question-card ol li {
+    margin-bottom: 2%;
+    padding: 2%;
+}
+
+#question-card ol li span {
+    margin-left: 4%;
+}
+
+#question-card ol li:hover {
+    background-color: #630436;
+    border-radius: 10px;
+    color: antiquewhite;
+}
+
+#form-card {
+    /* requires flex */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: auto;
+    margin: 8% auto 0 auto;
+}
+
+#form-card h2 {
+    font-size: 200%;
+    padding: 5%;
+    width: 60%;
+    text-align: center;
+    color: #630436;
+}
+
+#form-card h2 span {
+    margin-left: 5%;
+}
+
+#form-card input {
+    width: 70%;
+    padding: 2%;
+    font-size: 160%;
+    border-radius: 15px;
+}
+
+#button-container-on-form-card {
+    position: relative;
+    width: 50%;
+}
+
+#back-to-start-button-from-form {
+    position: absolute;
+    left: 0;
+}
+
+#submit-to-scoreboard {
+    position: absolute;
+    right:0;
+}
+
+#high-scores-card {
+    /* requires flex */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: auto;
+    margin: 8% auto 0 auto;
+    text-align: center;
+}
+
+#high-scores-card h2 {
+    font-size: 200%;
+    padding: 5%;
+    color: #630436;
+}
+
+#high-scores-card ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+    font-size: 150%;
+    width: 80%;
+    height: auto;
+    text-align: left;
+}
+
+#high-scores-card ol li {
+    position: relative;
+    background-color: rgba(255, 182, 193, 0.3);
+    padding: 2%;
+    margin-bottom: 3%;
+    border-radius: 5px;
+}
+
+#user-name {
+    position: absolute;
+    left: 15%;
+}
+
+#user-score {
+    position: absolute;
+    right: 2%;
+}
