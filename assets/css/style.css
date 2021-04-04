@@ -18,7 +18,7 @@ body {
 
 #right-box {
     /* requires block */
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     right: 0;
@@ -41,7 +41,7 @@ body {
 
 #welcome-card {
     /* change to flex to view card */
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -81,7 +81,7 @@ body {
 
 #question-card {
     /* needs flex to work */
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -169,7 +169,7 @@ body {
 
 #high-scores-card {
     /* requires flex */
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
