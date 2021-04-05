@@ -1,15 +1,18 @@
+// query selectors for all the necessary HTML elements that will be dynamically updated as the 
+// quiz runs, grouped by components of the quiz application
+// view high score link
 var highScoreBtn = document.querySelector('#high-score-link');
-
+// score and timer box and elements
 var topRightBox = document.querySelector('#right-box');
 var timeLeftSpan = document.querySelector('#time-left');
 var scoreSpan = document.querySelector('#score');
-
+// welcome card elements
 var welcomeCard = document.querySelector('#welcome-card');
 var questionTotalText = document.querySelector('#total-questions');
 var timeTotalText = document.querySelector('#total-time');
 var secondPenaltyText = document.querySelector('#second-penalty');
 var gameStartBtn = document.querySelector('#begin-button');
-
+// question card elements
 var questionCard = document.querySelector('#question-card');
 var questionText = document.querySelector('#question');
 var answerButtonA = document.querySelector('#answerA');
@@ -23,22 +26,31 @@ var questionChoice3 = document.querySelector('#choice-3');
 var questionChoice4 = document.querySelector('#choice-4');
 var questionChoice5 = document.querySelector('#choice-5');
 var correctOrWrongText = document.querySelector('#correct-Answer-Notifier');
-
+// form card
 var formCard = document.querySelector('#form-card');
 var finalScoreForCard = document.querySelector('#final-score');
 var nameInputTF = document.querySelector('#name-input');
 var backToStartFromForm = document.querySelector('#back-to-start-button-from-form');
 var submitToScoreboard = document.querySelector('#submit-to-scoreboard');
-
+// high scores card
 var highScoresCard = document.querySelector('#high-scores-card');
 var clearScoresBtn = document.querySelector('#clear-scores-button');
 var backToStartFromScores = document.querySelector("#back-to-start-button");
 
-var timer = 45; // change game time
-var questionCount = 10; // change amount of questions to ask
-var secondPenalty = 5; // change wrong answer time penalty
+// variables that change the amount of questions to ask the user
+// changes total quiz time
+var timer = 45; 
+// total amount of questions that will be asked, can be updated to a max of 25 which is
+// the current total of questions in the question bank
+var questionCount = 10;
+// time penalty when a question is answered incorrectly
+var secondPenalty = 5;
+// pulls high scores from the local storage in the browser or sets to empty array if nothing found
 var highScoreList = JSON.parse(localStorage.getItem("highScores")) || [];
 
+// initalization function, will update the total questions to ask, time penalty, and 
+// total quiz time in the welcome card; will also update the high scores by scanning the local
+// storage for previous high scores
 function init() {
     questionTotalText.textContent = questionCount;
     timeTotalText.textContent = timer;
@@ -46,146 +58,186 @@ function init() {
     updateHighScores();
 }
 
+// adds event listener to pull up the high score card from the welcome card (only place where 
+// high score link is visible)
 highScoreBtn.addEventListener("click", showHighScores);
 
+// function to display the high score card and hide the view high scores link
 function showHighScores() {
+    // high score link
     highScoreBtn.dataset.visibility = "hidden";
     highScoreBtn.style.display = "none";
+    // welcome card
     welcomeCard.dataset.visibility = "hidden";
     welcomeCard.style.display = "none";
+    // high score card
     highScoresCard.dataset.visibility = "visible";
     highScoresCard.style.display = "flex";
 }
 
-// update high scores
+// this function will clear the high score list, sort the user scores in descending order, re-set
+// the local storage of high scores with the sorted values, and update the high score list on the
+// HTML
 function updateHighScores() {
-
+    // reset of high score list
     document.body.children[5].children[1].innerHTML="";
-
+    // sorts the high score list by score in decending order
     highScoreList = highScoreList.sort(function(a,b) {
         return(b[1]-a[1]);
     });
-
+    // sets the sorted high score list in the local storage
     localStorage.setItem("highScores", JSON.stringify(highScoreList));
-    
+    // loop to create list items in the high score list and pull the correct user name and score
+    // from the high score array
     for (var i = 0; i < highScoreList.length; i++) {
-
+        // creates li tag
         var li = document.createElement('li');
+        // creates two span tags
         var span1 = document.createElement('span');
         var span2 = document.createElement('span');
-
+        // sets id and text with user name
         span1.id = "user-name";
         span1.textContent = highScoreList[i][0];
-
+        // sets id and text with user score
         span2.id = "user-score";
         span2.textContent = highScoreList[i][1];
-
+        // adds spans as children to li
         li.appendChild(span1);
         li.appendChild(span2);
-
+        // adds li to high score list parent
         document.body.children[5].children[1].appendChild(li);
     }
 }
 
+// event listener for the button on the high scores page which clears the current high scores
 clearScoresBtn.addEventListener("click", clearHighScores);
-// clear high scores
+
+// function which clears the high scores from the high scores list, from the array variable, and
+// sets the empty variable in the local storage
 function clearHighScores() {
-
+    // clears the list of high scores in the HTML
     document.body.children[5].children[1].innerHTML="";
+    // sets the high score list to an empty array
     highScoreList = [];
+    // sets the high score list array (which is empty) to local storage
     localStorage.setItem("highScores", JSON.stringify(highScoreList));
-
 }
 
-
+// event listener for the button click to return from the high score card to the welcome card
 backToStartFromScores.addEventListener("click", returnFromScores);
 
+// function which returns the user from the high score card to the welcome card
 function returnFromScores() {
+    // high score card
     highScoresCard.dataset.visibility = "hidden";
     highScoresCard.style.display = "none";
+    // high score card link seen when welcome card is visible
     highScoreBtn.dataset.visibility = "visible";
     highScoreBtn.style.display = "block";
+    // welcome card
     welcomeCard.dataset.visibility = "visible";
     welcomeCard.style.display = "flex";
 }
 
-gameStartBtn.addEventListener("click", startGame);
-
-function returnFromScoreForm() {
-    formCard.dataset.visibility = "hidden";
-    formCard.style.display = "none";
-
-    welcomeCard.dataset.visibility = "visible";
-    welcomeCard.style.display = "flex";
-
-}
-
+//event listener for button click to return to welcome card from high score entry card
 backToStartFromForm.addEventListener("click", returnFromScoreForm);
 
-// work here
-function submitScore() {
-    var usersFinalScore = finalScoreForCard.textContent;
-    var userName = nameInputTF.value;
-
-    highScoreList.push([userName, usersFinalScore]);
-    updateHighScores();
-
+// function which returns from the form card to the welcome card
+function returnFromScoreForm() {
+    // form card
     formCard.dataset.visibility = "hidden";
     formCard.style.display = "none";
+    // welcome card
+    welcomeCard.dataset.visibility = "visible";
+    welcomeCard.style.display = "flex";
+}
 
+// event listener for the button to submit score and name to the high score list
+submitToScoreboard.addEventListener("click", submitScore);
+
+// function which submits user name and high score to the score list, will also update the 
+// high score list array
+function submitScore() {
+    // takes the score and user name from the form card and stores in variables for processing
+    var usersFinalScore = finalScoreForCard.textContent;
+    var userName = nameInputTF.value;
+    // pushes the user and score onto the high score list array
+    highScoreList.push([userName, usersFinalScore]);
+    // calls to update the high score list
+    updateHighScores();
+    // hides the form card
+    formCard.dataset.visibility = "hidden";
+    formCard.style.display = "none";
+    // displays high score card
     highScoresCard.dataset.visibility = "visible";
     highScoresCard.style.display = "flex";
-
+    // changes the value in the input text field on the form card to blank once the form card
+    // is no longer visible
     nameInputTF.value = "";
 }
 
-submitToScoreboard.addEventListener("click", submitScore);
+// event listener on the welcome card for the user to start the quiz
+gameStartBtn.addEventListener("click", startGame);
 
+// core function of the application.  will display the questions card and dynamically update the
+// HTML with new questions, new answers, start the timer, keep track of the score, display the 
+// correct or wrong answer notifier, and verify if time ran out or the correct amount of questions
+// have been asked
 function startGame() {
     // START GAME INITIALIZATION
+    // gets the question pool from the question bank
     var questionPool = generateQuestionPool();
+    // turns on the scoreboard and timer
     scoreboardAndTimerToggle();
-
+    // hides the welcome card
     welcomeCard.dataset.visibility = "hidden";
     welcomeCard.style.display = "none";
-
+    // displays the question card
     questionCard.dataset.visibility = "visible";
     questionCard.style.display = "flex";
-
+    // creates event listeners for button clicks on the 5 list items where the answers are displayed
     answerButtonA.addEventListener("click", verifyAnswerToNextQuestion);
     answerButtonB.addEventListener("click", verifyAnswerToNextQuestion);
     answerButtonC.addEventListener("click", verifyAnswerToNextQuestion);
     answerButtonD.addEventListener("click", verifyAnswerToNextQuestion);
     answerButtonE.addEventListener("click", verifyAnswerToNextQuestion);
-
+    // updates timer on the top right of the screen once the question card is displayed
     updateTimer(timer);
-    
+    // gets the working timer for the game from the timer variable which stores how many seconds
+    // the game should last
     var currentGameTimer = timer;
+    // sets the amount of questions that have been asked to 0, also used as index for the question
+    // pool
     var traversedQuestionCount = 0;
+    // sets user score to 0
     var userScore = 0;
-
+    // updates user score on top right of screen
+    updateScore(userScore);
+    // updates the question in the question card to the first question in the question bank
     updateQuestion();
-
     // END INITIALIZATION
 
-    // WORKS BUT NEED TO GET EVENT LISTENER HANDLED
+    // starts the timer for the game, each interval is 1 second long
     var timeInterval = setInterval(function() {
+        // counts down the timer and updates what is displayed to the user
         currentGameTimer--;
         updateTimer(currentGameTimer);
-    
+        // condition to check if the timer has run out of if the correct amount of questions
+        // have been asked
         if(currentGameTimer <= 0 || traversedQuestionCount === (questionCount)) {
-          console.log(gameOver);
+          // will terminate the timer with clearInterval call
           clearInterval(timeInterval);
-
+          // removes listeners on the answer choices since the game is over at this point,
+          // fixes bug regarding duplicate listeners
           answerButtonA.removeEventListener("click", verifyAnswerToNextQuestion);
           answerButtonB.removeEventListener("click", verifyAnswerToNextQuestion);
           answerButtonC.removeEventListener("click", verifyAnswerToNextQuestion);
           answerButtonD.removeEventListener("click", verifyAnswerToNextQuestion);
           answerButtonE.removeEventListener("click", verifyAnswerToNextQuestion);
-
+          // calls game over since the game is indeed over
           gameOver(userScore);
         }
-    
+    // interval set to 1000 milliseconds, or 1 second
     }, 1000);
 
     function verifyAnswerToNextQuestion(event) {
@@ -494,5 +546,6 @@ function gameOver(gameScore){
     updateScore(0);
     updateTimer(0);
 }
+
 
 init();
