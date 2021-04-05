@@ -235,3 +235,45 @@ body {
     position: absolute;
     right: 2%;
 }
+
+@media screen and (max-width: 800px) {
+    #question-card {
+        margin-top: 16%;
+        width: 80%;
+    }
+
+    #form-card {
+        width: 80%;
+        margin-top: 16%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #welcome-card {
+        width: 90%;
+        margin-top: 20%;
+    }
+    
+    #question-card {
+        margin-top: 16%;
+        width: 95%;
+    }
+
+    #question-card ol {
+        width: 80%;
+    }
+
+    #form-card {
+        width: 95%;
+        margin-top: 16%;
+    }
+
+    #high-scores-card {
+        width: 80%;
+        margin-top: 16%;
+    }
+
+    #button-container-on-form-card {
+        width: 80%;
+    }
+}
