@@ -62,6 +62,10 @@ function updateHighScores() {
 
     document.body.children[5].children[1].innerHTML="";
 
+    highScoreList = highScoreList.sort(function(a,b) {
+        return(b[1]-a[1]);
+    });
+
     localStorage.setItem("highScores", JSON.stringify(highScoreList));
     
     for (var i = 0; i < highScoreList.length; i++) {
@@ -90,7 +94,7 @@ function clearHighScores() {
     document.body.children[5].children[1].innerHTML="";
     highScoreList = [];
     localStorage.setItem("highScores", JSON.stringify(highScoreList));
-    
+
 }
 
 

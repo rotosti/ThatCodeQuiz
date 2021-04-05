@@ -1,5 +1,5 @@
 body {
-    font-family: 'Dela Gothic One', cursive;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 #high-score-link {
@@ -62,11 +62,12 @@ body {
 #welcome-card p {
     line-height: 1.4;
     font-size: 140%;
+    margin-bottom: 5%;
 }
 
 .button {
     padding: 2%;
-    margin-top: 8%;
+    margin-top: 6%;
     font-size: 160%;
     width: 40%;
     border-radius: 12px;
