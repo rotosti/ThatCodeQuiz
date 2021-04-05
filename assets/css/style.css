@@ -3,6 +3,7 @@ body {
 }
 
 #high-score-link {
+    /* requires block */
     display: block;
     position: fixed;
     top: 0;
@@ -18,7 +19,7 @@ body {
 
 #right-box {
     /* requires block */
-    display: block;
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -81,7 +82,7 @@ body {
 
 #question-card {
     /* needs flex to work */
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -122,9 +123,16 @@ body {
     color: antiquewhite;
 }
 
+#correct-Answer-Notifier {
+    /* needs block */
+    display: none;
+    padding: 10%;
+    font-size: 250%;
+}
+
 #form-card {
     /* requires flex */
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -169,7 +177,7 @@ body {
 
 #high-scores-card {
     /* requires flex */
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;

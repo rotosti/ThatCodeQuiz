@@ -11,47 +11,47 @@
     <title>Challenge Yourself Code Quiz</title>
 </head>
 <body>
-    <div id="high-score-link">View High Scores</div>
-    <div id="right-box">
+    <div id="high-score-link" data-visibility="visible">View High Scores</div>
+    <div id="right-box" data-visibility="hidden">
         <div class="right-box-title">Time: <span class="updating-text" id="time-left">00</span></div>
         <div class="right-box-title">Score: <span class="updating-text" id="score">00</span></div>
     </div>
 
-    <div id="welcome-card">
+    <div id="welcome-card" data-visibility="visible">
         <h1>Welcome to the Challenge Yourself Code Quiz</h1>
-        <p>In this coding quiz, you are given <span id="total-questions">10</span> questions.  You have 
-            <span id="total-time">30</span> seconds to answer the multiple choice
-            questions presented to you.  If you answer a question incorrectly, you will lose 2 seconds.
-            If you run out of time, the quiz will end. 
+        <p>In this coding quiz, you are given <span id="total-questions"></span> questions.  You have 
+            <span id="total-time"></span> seconds to answer the multiple choice
+            questions presented to you.  If you answer a question incorrectly, you will lose 
+            <span id="second-penalty"></span> seconds.  If you run out of time, the quiz will end. 
         </p>
         <p>When you are ready, click the begin button below.</p>
         <div class="button" id="begin-button">Begin</div>
     </div>
 
-    <div id="question-card">
+    <div id="question-card" data-visibility="hidden">
         <h2 id="question">This is a place holder question to figure out the layout.</h2>
         <ol>
-            <li ><span id="choice-1">What</span></li>
-            <li ><span id="choice-2">Okay</span></li>
-            <li ><span id="choice-3">Huh?</span></li>
-            <li ><span id="choice-4">No Way</span></li>
-            <li ><span id="choice-5">Bruhhhh</span></li>
+            <li id="answerA" data-value="What"><span id="choice-1" data-value="What">What</span></li>
+            <li id="answerB"><span id="choice-2">Okay</span></li>
+            <li id="answerC"><span id="choice-3">Huh?</span></li>
+            <li id="answerD"><span id="choice-4">No Way</span></li>
+            <li id="answerE"><span id="choice-5">Bruhhhh</span></li>
         </ol>
+        <h3 id="correct-Answer-Notifier"></h3>
     </div>
 
-    <div id="form-card">
+    <div id="form-card" data-visibility="hidden">
         <h2>Your Score: <span id="final-score"></span></h2>
-        <input placeholder="Your name.." type="text">
+        <input placeholder="Your name.." type="text" id="name-input">
         <div id="button-container-on-form-card">
             <div class="button" id="back-to-start-button-from-form">Back to Start</div>
             <div class="button" id="submit-to-scoreboard">Submit Score</div>
         </div>
     </div>
 
-    <div id="high-scores-card">
+    <div id="high-scores-card" data-visibility="hidden">
         <h2>High Scores</h2>
         <ol>
-            <!-- <li><span id="user-name">Bro</span><span id="user-score">90</span></li> -->
         </ol>
         <div class="button" id="back-to-start-button">Back</div>
     </div>
