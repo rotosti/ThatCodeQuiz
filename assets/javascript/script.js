@@ -33,9 +33,9 @@ var submitToScoreboard = document.querySelector('#submit-to-scoreboard');
 var highScoresCard = document.querySelector('#high-scores-card');
 var backToStartFromScores = document.querySelector("#back-to-start-button");
 
-var timer = 30; // change game time
-var questionCount = 4; // change amount of questions to ask
-var secondPenalty = 3; // change wrong answer time penalty
+var timer = 45; // change game time
+var questionCount = 10; // change amount of questions to ask
+var secondPenalty = 5; // change wrong answer time penalty
 
 function updateWelcomeCard() {
     questionTotalText.textContent = questionCount;
