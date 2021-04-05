@@ -31,16 +31,19 @@ var backToStartFromForm = document.querySelector('#back-to-start-button-from-for
 var submitToScoreboard = document.querySelector('#submit-to-scoreboard');
 
 var highScoresCard = document.querySelector('#high-scores-card');
+var clearScoresBtn = document.querySelector('#clear-scores-button');
 var backToStartFromScores = document.querySelector("#back-to-start-button");
 
 var timer = 45; // change game time
 var questionCount = 10; // change amount of questions to ask
 var secondPenalty = 5; // change wrong answer time penalty
+var highScoreList = JSON.parse(localStorage.getItem("highScores")) || [];
 
-function updateWelcomeCard() {
+function init() {
     questionTotalText.textContent = questionCount;
     timeTotalText.textContent = timer;
     secondPenaltyText.textContent = secondPenalty;
+    updateHighScores();
 }
 
 highScoreBtn.addEventListener("click", showHighScores);
@@ -53,6 +56,43 @@ function showHighScores() {
     highScoresCard.dataset.visibility = "visible";
     highScoresCard.style.display = "flex";
 }
+
+// update high scores
+function updateHighScores() {
+
+    document.body.children[5].children[1].innerHTML="";
+
+    localStorage.setItem("highScores", JSON.stringify(highScoreList));
+    
+    for (var i = 0; i < highScoreList.length; i++) {
+
+        var li = document.createElement('li');
+        var span1 = document.createElement('span');
+        var span2 = document.createElement('span');
+
+        span1.id = "user-name";
+        span1.textContent = highScoreList[i][0];
+
+        span2.id = "user-score";
+        span2.textContent = highScoreList[i][1];
+
+        li.appendChild(span1);
+        li.appendChild(span2);
+
+        document.body.children[5].children[1].appendChild(li);
+    }
+}
+
+clearScoresBtn.addEventListener("click", clearHighScores);
+// clear high scores
+function clearHighScores() {
+
+    document.body.children[5].children[1].innerHTML="";
+    highScoreList = [];
+    localStorage.setItem("highScores", JSON.stringify(highScoreList));
+    
+}
+
 
 backToStartFromScores.addEventListener("click", returnFromScores);
 
@@ -78,24 +118,13 @@ function returnFromScoreForm() {
 
 backToStartFromForm.addEventListener("click", returnFromScoreForm);
 
+// work here
 function submitScore() {
     var usersFinalScore = finalScoreForCard.textContent;
     var userName = nameInputTF.value;
 
-    var li = document.createElement('li');
-    var span1 = document.createElement('span');
-    var span2 = document.createElement('span');
-
-    span1.id = "user-name";
-    span1.textContent = userName;
-
-    span2.id = "user-score";
-    span2.textContent = usersFinalScore;
-
-    li.appendChild(span1);
-    li.appendChild(span2);
-
-    document.body.children[5].children[1].appendChild(li);
+    highScoreList.push([userName, usersFinalScore]);
+    updateHighScores();
 
     formCard.dataset.visibility = "hidden";
     formCard.style.display = "none";
@@ -462,4 +491,4 @@ function gameOver(gameScore){
     updateTimer(0);
 }
 
-updateWelcomeCard();
+init();
