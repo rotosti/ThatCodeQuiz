@@ -11,12 +11,18 @@
     <title>Challenge Yourself Code Quiz</title>
 </head>
 <body>
+    <!-- This is the view high score in the top left corner of the screen -->
     <div id="high-score-link" data-visibility="visible">View High Scores</div>
+
+    <!-- This is the score and timer when the game is started, only visible during the quiz -->
     <div id="right-box" data-visibility="hidden">
         <div class="right-box-title">Time: <span class="updating-text" id="time-left"></span></div>
         <div class="right-box-title">Score: <span class="updating-text" id="score"></span></div>
     </div>
 
+    <!-- this is the card that dynamiclly updates based on the variables for the question amount, 
+        penalty, and amount of total time given to complete the quiz, set in the javascript file.
+        This is the first card that is shown when a user loaded the quiz -->
     <div id="welcome-card" data-visibility="visible">
         <h1>Welcome to the Think Outside the Box Code Quiz</h1>
         <p>In this coding quiz, you are given <span id="total-questions"></span> questions.  You have 
@@ -25,9 +31,11 @@
             <span id="second-penalty"></span> seconds.  If you run out of time, the quiz will end. 
         </p>
         <p>When you are ready, click the begin button below.</p>
+        <!-- button to start the game, styled with CSS as a div -->
         <div class="button" id="begin-button">Begin</div>
     </div>
 
+    <!-- dynamically updating question card, visible once game is started -->
     <div id="question-card" data-visibility="hidden">
         <h2 id="question"></h2>
         <ol>
@@ -37,23 +45,30 @@
             <li id="answerD" data-value=""><span id="choice-4" data-value=""></span></li>
             <li id="answerE" data-value=""><span id="choice-5" data-value=""></span></li>
         </ol>
+        <!-- notifies user if the selection was correct or not -->
         <h3 id="correct-Answer-Notifier"></h3>
     </div>
 
+    <!-- immediate card displayed after the questions, will ask for the user
+        to enter in a name and submit score or to go back to the welcome card -->
     <div id="form-card" data-visibility="hidden">
         <h2>Your Score: <span id="final-score"></span></h2>
         <input placeholder="Your name.." type="text" id="name-input">
         <div id="button-container-on-form-card">
+            <!-- buttons to go back or submit form -->
             <div class="button" id="back-to-start-button-from-form">Back to Start</div>
             <div class="button" id="submit-to-scoreboard">Submit Score</div>
         </div>
     </div>
 
+    <!-- high scores card, will update on refresh of the page based on what is contained in
+    local storage as well as when a user submits their name and score to the high scores list -->
     <div id="high-scores-card" data-visibility="hidden">
         <h2>High Scores</h2>
         <ol>
         </ol>
         <div id="button-container-on-high-scores">
+            <!-- buttons to clear scoreboard or go back to welcome card -->
             <div class="button" id="clear-scores-button">Clear</div>
             <div class="button" id="back-to-start-button">Back</div>
         </div>
