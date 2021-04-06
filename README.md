@@ -27,4 +27,4 @@ Form Card
 ![](./assets/images/FormCard.png)
 
 High Scores Card
-![](./assest/images/HighScoresCard.png)
+![](./assets/images/HighScoresCard.png)
