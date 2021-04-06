@@ -239,98 +239,116 @@ function startGame() {
         }
     // interval set to 1000 milliseconds, or 1 second
     }, 1000);
-
+    // nested function in the start game function, unique to the event listener for choosing answers,
+    // will verify if the target answer is correct and react accordingly
     function verifyAnswerToNextQuestion(event) {
-
+        // timer to display the answer notification text
         var wrongOrRightTimer = 1;
-
+        // checks if the data-value property of the target click is the correct answer
         if (event.target.dataset.value === questionPool[traversedQuestionCount][6]) {
-
+            // displays correct answer text notifying the user the answer selection was correct
             correctOrWrongText.style.color = "green";
             correctOrWrongText.innerHTML = "CORRECT";
             correctOrWrongText.style.display = "block";
-
+            // updates the score since the question was answered correctly
             userScore += 5;
+            // updates the user score span on the HTML
             updateScore(userScore);
-
+            // counts answered question towards the total asked question count
             traversedQuestionCount++;
-
+            // sets an intervial to show the correct answer notification to .7 seconds
             var timeInterval = setInterval(function() {
-                
+                //counts down the timer
                 wrongOrRightTimer--;
-                
+                // checks if the timer is 0
                 if(wrongOrRightTimer === 0) {
+                    // stops the answer notification timer
                     clearInterval(timeInterval);
+                    // hides the answer notification from user
                     correctOrWrongText.style.display = "none";
-
+                    // verifies if to update the question if there are remaining questions in the
+                    // question pool
                     if (traversedQuestionCount < questionPool.length) {
+                        // calls function that updates question based on the current question count
                         updateQuestion();
                     }
                 }
+            // interval time of 700 milliseconds, or .7 seconds
             }, 700);
-
+        // if selected target is the wrong answer
         } else {
-
+            // displays wrong answer text notifying the user the selection was not correct
             correctOrWrongText.style.color = "red";
             correctOrWrongText.innerHTML = "WRONG";
             correctOrWrongText.style.display = "block";
-
+            // applies game time penalty for getting an answer wrong
             currentGameTimer -= secondPenalty;
+            // updates time to the new time after penalty deduction
             updateTimer(currentGameTimer);
-
+            // counts answered question towards the total asked question count
             traversedQuestionCount++;
-        
+            // sets an intervial to show the wrong answer notification to .7 seconds
             var timeInterval = setInterval(function() {
-                
+                //counts down the timer
                 wrongOrRightTimer--;
-
+                // checks if the timer is 0
                 if(wrongOrRightTimer === 0) {
+                    // stops the answer notification timer
                     clearInterval(timeInterval);
+                    // hides the answer notification from user
                     correctOrWrongText.style.display = "none";
-
+                    // verifies if to update the question if there are remaining questions in the
+                    // question pool
                     if (traversedQuestionCount < questionPool.length) {
+                         // calls function that updates question based on the current question count
                         updateQuestion();
                     }
                 }
+            // interval time of 700 milliseconds, or .7 seconds
             }, 700);
         }
     }
-
+    // updates the question card question and answers using the traversed question count as the index
     function updateQuestion() {
+        // updates the question
         questionText.textContent = questionPool[traversedQuestionCount][0];
-
+        // updates answer A
         questionChoice1.textContent = questionPool[traversedQuestionCount][1];
         questionChoice1.dataset.value = questionPool[traversedQuestionCount][1];
         answerButtonA.dataset.value = questionPool[traversedQuestionCount][1];
-
+        // updates answer B
         questionChoice2.textContent = questionPool[traversedQuestionCount][2];
         questionChoice2.dataset.value = questionPool[traversedQuestionCount][2];
         answerButtonB.dataset.value = questionPool[traversedQuestionCount][2];
-
+        // updates answer C
         questionChoice3.textContent = questionPool[traversedQuestionCount][3];
         questionChoice3.dataset.value = questionPool[traversedQuestionCount][3];
         answerButtonC.dataset.value = questionPool[traversedQuestionCount][3];
-        
+        // updates answer D
         questionChoice4.textContent = questionPool[traversedQuestionCount][4];
         questionChoice4.dataset.value = questionPool[traversedQuestionCount][4];
         answerButtonD.dataset.value = questionPool[traversedQuestionCount][4];
-        
+        // updates answer E
         questionChoice5.textContent = questionPool[traversedQuestionCount][5];
         questionChoice5.dataset.value = questionPool[traversedQuestionCount][5];
         answerButtonE.dataset.value = questionPool[traversedQuestionCount][5];
     }
 }
 
+// function which randomly picks a specified amount of questions out of the question bank (based on
+// the amount of questions designated in the quiz at the variable declaration)
 function generateQuestionPool() {
+    // array to store questions that will be sent back to caller
     var questionsToSendBack = [];
+    // question bank as an array containing arrays
     var questionBank = [
-        ["A Javascript variable is declared with which of the following keywords?",
-        "var",
-        "true",
-        "span",
-        "function",
-        "rubberDucky",
-        "var"], 
+        ["A Javascript variable is declared with which of the following keywords?", // question
+        "var", // answer A
+        "true", // answer B
+        "span", // answer C
+        "function", // answer D
+        "rubberDucky", // answer E
+        "var"], // correct answer
         ["HTML stands for ______",
         "Heavy Text Markup Language",
         "Hyper Text Markup Language",
@@ -381,7 +399,7 @@ function generateQuestionPool() {
         "50",
         "10"],
         ["What symbol is used to create comments in Javascript?",
-        "\\\\",
+        "\\\\", // escaped characters
         "//",
         "/* */",
         "<!-- -->",
@@ -501,51 +519,64 @@ function generateQuestionPool() {
         "var c = c + b"],
     ]
 
+    // loop to randomly pull questions from the question bank and verify the question was not
+    // repeated
     for (var i = 0; i < questionCount; i++) {
+        // gets random index using Math.random()
         var questionBankIndex = Math.floor(Math.random() * questionBank.length);
-        
+        // verifies if the question that is being selected by the random number exists in the 
+        // questions to send back, it if does, it decreases i and repeats process
         if (questionsToSendBack.includes(questionBank[questionBankIndex])) {
-            i--;
+            i--;// decrement of i to repeat the same iteration again
         } else {
+            // adds question to the array if the question is unique to the array
             questionsToSendBack.push(questionBank[questionBankIndex]);
         }
     }
-
+    // returns the questions back to the caller
     return questionsToSendBack;
 }
 
+// function specific to disabling the view on the score and timer in the top right of the
+// screen
 function scoreboardAndTimerToggle() {
-
+    // if the scoreboard and timer is hidden, make is visible
     if (topRightBox.dataset.visibility === "hidden") {
         topRightBox.dataset.visibility = "visible";
         topRightBox.style.display = "block";
-    } else {
+    } else { // if the scoreboard is visible, make it hidden
         topRightBox.dataset.visibility = "hidden";
         topRightBox.style.display = "none";
     }
 }
 
+// function to update the timer in the top right of the app when the questions card is visible
 function updateTimer(time) {
     timeLeftSpan.textContent = time;
 }
 
+// function to update the score in the top right of the app when the questions card is visible
 function updateScore(score) {
     scoreSpan.textContent = score;
 }
 
+// function which is called at the end of the quiz when either the timer hits 0 or the correct
+// amount of questions are asked and answered
 function gameOver(gameScore){
+    // toggles the visibility of the scoreboard and timer
     scoreboardAndTimerToggle();
-
+    // question card
     questionCard.dataset.visibility = "hidden";
     questionCard.style.display = "none";
-
+    // form card
     formCard.dataset.visibility = "visible";
     formCard.style.display = "flex";
+    // takes the final quiz score and updates the form card
     finalScoreForCard.textContent = gameScore;
-
+    // resets the scoreboard and timer
     updateScore(0);
     updateTimer(0);
 }
 
-
+// initializes the app
 init();
