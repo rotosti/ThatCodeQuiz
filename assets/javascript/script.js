@@ -195,6 +195,9 @@ function startGame() {
     // displays the question card
     questionCard.dataset.visibility = "visible";
     questionCard.style.display = "flex";
+    // turns of high score button during game
+    highScoreBtn.dataset.visibility = "hidden";
+    highScoreBtn.style.display = "none";
     // creates event listeners for button clicks on the 5 list items where the answers are displayed
     answerButtonA.addEventListener("click", verifyAnswerToNextQuestion);
     answerButtonB.addEventListener("click", verifyAnswerToNextQuestion);
@@ -563,6 +566,9 @@ function updateScore(score) {
 // function which is called at the end of the quiz when either the timer hits 0 or the correct
 // amount of questions are asked and answered
 function gameOver(gameScore){
+    // turns the high score link back to visible
+    highScoreBtn.dataset.visibility = "visible";
+    highScoreBtn.style.display = "block";
     // toggles the visibility of the scoreboard and timer
     scoreboardAndTimerToggle();
     // question card
